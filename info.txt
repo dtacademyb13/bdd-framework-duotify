@@ -1,0 +1,8 @@
+BBD Framework Building Steps:
+
+1. Create a maven project
+2. Add the necessary dependencies
+3. Add 3 Cucumber specific dependencies: cucumber-java, cucumber-core, cucumber-junit
+4. Add .gitignore
+5. Create the package structure (runner, stepdefinitions, resources)
+6. Add the necesary utilities and .property files
