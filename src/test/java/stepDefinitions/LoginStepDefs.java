@@ -31,7 +31,7 @@ public class LoginStepDefs {
     public void theUserShouldBeDirectedToThePersonalDashboard() {
 
         Assert.assertEquals("Welcome to Duotify!", Driver.getDriver().getTitle());
-        Driver.quitDriver();
+
     }
 
 
@@ -45,8 +45,18 @@ public class LoginStepDefs {
     }
     @Then("the user should not be directed to the personal dashboard")
     public void the_user_should_not_be_directed_to_the_personal_dashboard() {
-        Assert.assertNotEquals("Welcome to Duotify!", Driver.getDriver().getTitle());
-        Driver.quitDriver();
+        Assert.assertNotEquals("http://duotify.us-east-2.elasticbeanstalk.com/browse.php?", Driver.getDriver().getCurrentUrl());
+
+    }
+
+
+    @When("the user enters no username and password")
+    public void the_user_enters_no_username_and_password() {
+        Driver.getDriver().findElement(By.id("loginUsername")).
+                sendKeys("",
+                        Keys.TAB,
+                        "",
+                        Keys.ENTER);
     }
 
 

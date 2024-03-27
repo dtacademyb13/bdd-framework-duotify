@@ -5,4 +5,15 @@ BBD Framework Building Steps:
 3. Add 3 Cucumber specific dependencies: cucumber-java, cucumber-core, cucumber-junit
 4. Add .gitignore
 5. Create the package structure (runner, stepdefinitions, resources)
-6. Add the necesary utilities and .property files
+6. Add the necessary utilities and .property files
+7. Add the feature file and scenarios
+8. Add the step definition class
+9. Generate the step definition snippets
+10. Implement the code for each step definition
+11.
+
+
+
+
+
+
