@@ -6,24 +6,21 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 
 public class LoginStepDefs {
 
 
-    @Given("the user is on the homepage")
+    @Given("the user is on the login page")
     public void theUserIsOnTheHomepage() {
         Driver.getDriver().get(ConfigReader.getProperty("url"));
     }
 
     @When("the user enters valid username and password")
     public void theUserEntersValidUsernameAndPassword() {
-        Driver.getDriver().findElement(By.id("loginUsername")).
-                sendKeys(ConfigReader.getProperty("username"),
-                        Keys.TAB,
-                        ConfigReader.getProperty("password"),
-                        Keys.ENTER);
+          new LoginPage().login();
     }
 
 
@@ -37,11 +34,9 @@ public class LoginStepDefs {
 
     @When("the user enters invalid username and password")
     public void the_user_enters_invalid_username_and_password() {
-        Driver.getDriver().findElement(By.id("loginUsername")).
-                sendKeys("Ssd",
-                        Keys.TAB,
-                        "dsd",
-                        Keys.ENTER);
+
+         new LoginPage().login("duotech2023", "duotech" );
+        throw new RuntimeException("fail");
     }
     @Then("the user should not be directed to the personal dashboard")
     public void the_user_should_not_be_directed_to_the_personal_dashboard() {
@@ -52,11 +47,7 @@ public class LoginStepDefs {
 
     @When("the user enters no username and password")
     public void the_user_enters_no_username_and_password() {
-        Driver.getDriver().findElement(By.id("loginUsername")).
-                sendKeys("",
-                        Keys.TAB,
-                        "",
-                        Keys.ENTER);
+        new LoginPage().login("", "" );
     }
 
 
