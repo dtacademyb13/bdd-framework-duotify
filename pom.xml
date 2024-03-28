@@ -65,4 +65,26 @@
 
     </dependencies>
 
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.2.5</version>
+                    <configuration>
+                        <includes>CucumberRunner.java</includes>
+
+<!--                        when you need to pass different runner classes from command line-->
+<!--                        <includes>${runner}</includes>-->
+                    </configuration>
+
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+
 </project>

@@ -48,9 +48,33 @@ Pretty plugin adds more detailed step description and logs on the console and ma
 
 Step Notifications option adds detailed step status on the junit runner report to see a detailed overview of each step's pass/fail status
 
+Run Cucumber Tests through command line:
 
+- Configure Maven Surefire plugin in pom.xml to indicate the runner class:
+   <build>
+           <pluginManagement>
+               <plugins>
+                   <plugin>
+                       <groupId>org.apache.maven.plugins</groupId>
+                       <artifactId>maven-surefire-plugin</artifactId>
+                       <version>3.2.5</version>
+                       <configuration>
+                           <includes>CucumberRunner.java</includes>
+                       </configuration>
+                   </plugin>
+               </plugins>
+           </pluginManagement>
+       </build>
 
+- Run tests with mvn test command.
 
+How to run scenarios with specific tag/s through CMD in Cucumber?
+
+mvn test -D cucumber.filter.tags="@positive"
+mvn test -D cucumber.filter.tags="@positive and @smoke"
+mvn test -D cucumber.filter.tags="@positive or @smoke"
+
+When you pass the tags through CMD with -D cucumber.filter.tags, it will override the Runner class's tags.
 
 
 
