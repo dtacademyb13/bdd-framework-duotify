@@ -45,11 +45,18 @@ public class LoginStepDefs {
     }
 
 
-    @When("the user enters no username and password")
+    @When("^the user enters no username and password$") // regular expression
     public void the_user_enters_no_username_and_password() {
         new LoginPage().login("", "" );
     }
 
+
+
+
+    @When("the user enters valid username as {string} and password as {string}") // cucumber expressions
+    public void theUserEntersValidUsernameAsAndPasswordAs(String username, String pass) {
+        new LoginPage().login(username, pass);
+    }
 
 
 }

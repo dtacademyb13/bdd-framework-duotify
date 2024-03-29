@@ -26,7 +26,15 @@ Feature: User login for Music Streaming App
     When the user enters no username and password
     Then the user should not be directed to the personal dashboard
 
+    @parametrized
+  Scenario: Successful login wih a valid username and password 1
+    When the user enters valid username as "duotech2023" and password as "duotech"
+    Then the user should be directed to the personal dashboard
 
+  @parametrized
+  Scenario: Successful login wih a valid username and password 2
+    When the user enters valid username as "duotech2050" and password as "duotech123"
+    Then the user should be directed to the personal dashboard
 
 
 
