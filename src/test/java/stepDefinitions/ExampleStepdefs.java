@@ -61,4 +61,32 @@ public class ExampleStepdefs {
 
         System.out.println(map);
     }
+
+    @When("I pass the following user information list of lists")
+    public void i_pass_the_following_user_information_list_of_lists(List<List<String>> dataTable) {
+        System.out.println(dataTable.get(0)); // [Annie M. G., Schmidt, 1911-03-20]
+        System.out.println(dataTable.get(0).get(1)); // Schmidt
+        System.out.println(dataTable.get(2).get(2)); // 1907-11-14
+
+        System.out.println(dataTable);
+    }
+
+    @When("I pass the following user information list of maps")
+    public void i_pass_the_following_user_information_list_of_maps(List<Map<String,String>> dataTable) {
+        System.out.println(dataTable);
+    }
+
+
+    @When("I pass the following user information map with value as list")
+    public void i_pass_the_following_user_information_map_with_value_as_list(Map<String, List<String>> dataTable) {
+        System.out.println(dataTable);
+        System.out.println(dataTable.get("323-43-4343"));
+        System.out.println(dataTable.get("323-43-4343").get(1));
+    }
+
+    @When("I pass the following user information as a list")
+    public void i_pass_the_following_user_information_as_a_list(List<String> dataTable) {
+        System.out.println(dataTable);
+    }
+
 }

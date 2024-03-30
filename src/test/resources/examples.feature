@@ -48,7 +48,7 @@ Feature: Examples of cucumber features
     """
 #   And I have another step
 
-  @test
+
   Scenario: Cucumber Data Table as List
 
     When I pass the following user information
@@ -60,7 +60,7 @@ Feature: Examples of cucumber features
 
 #    single column represents List
 
-  @test
+
   Scenario: Cucumber Data Table as Map
 
     When I pass the following user information map
@@ -71,3 +71,54 @@ Feature: Examples of cucumber features
       | password   | duotech2024           |
 
 #    two columns represent Map
+
+
+
+  Scenario: Cucumber Data Table as List of lists
+
+    When I pass the following user information list of lists
+      | Annie M. G. | Schmidt  | 1911-03-20 |
+      | Roald       | Dahl     | 1916-09-13 |
+      | Astrid      | Lindgren | 1907-11-14 |
+
+
+#    table can be represented as List<List<String>>
+
+
+
+  Scenario: Cucumber Data Table as List of maps
+
+    When I pass the following user information list of maps
+      | firstName   | lastName | birthDate  |
+      | Annie M. G. | Schmidt  | 1911-03-20 |
+      | Roald       | Dahl     | 1916-09-13 |
+      | Astrid      | Lindgren | 1907-11-14 |
+
+
+#    table can be represented as List<Map<String, String>> where the first row values are used as keys
+
+
+
+  Scenario: Cucumber Data Table as map with value as list
+
+    When I pass the following user information map with value as list
+
+     | 123-09-3452 | Annie M. G. | Schmidt  | 1911-03-20 |
+     | 532-23-4342  | Roald       | Dahl     | 1916-09-13 |
+     | 323-43-4343  | Astrid      | Lindgren | 1907-11-14 |
+
+#    table can be represented as Map<String, List<String>>
+
+
+  @test
+  Scenario: Cucumber Data Table common mistakes
+
+    When I pass the following user information as a list
+#        DON'T DO THIS
+      | duotech9999 | Duotech | Academy | duotech2029@gmail.com | duotech2024 |
+
+
+
+
+
+

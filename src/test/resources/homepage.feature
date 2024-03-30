@@ -20,6 +20,20 @@ Feature: Music Streaming App Homepage
     Then the user should see the homepage links
 
 
-  @albums
+
   Scenario: Verify homepage default albums
     Then the user should see 9 recommended albums
+
+  @albums
+  Scenario: Default albums
+
+    Then the following recommended albums should be displayed
+      | Cruel Summer        |
+      | Fenix               |
+      | Werk                |
+      | Marisa              |
+      | Escape              |
+      | Ultimatum           |
+      | Oscillation         |
+      | Clouds              |
+      | I am Sasha Fierce   |

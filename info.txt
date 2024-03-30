@@ -76,6 +76,49 @@ mvn test -D cucumber.filter.tags="@positive or @smoke"
 
 When you pass the tags through CMD with -D cucumber.filter.tags, it will override the Runner class's tags.
 
+Cucumber parametrized step enables the step to be used multiple times with different sets of data and prevents multiple step snippet generation
+
+  Cucumber automatically converts matching types (String, int,double) from scenario step into corresponding parameter({string},{int},{double}) and adds it to a snippet method as a parameter:
+  Ex:
+      Scenario Step:           Given I have 5 pounds of cucumbers of type "Cuke" that cost me 5.99 dollars
+
+      Generated snippet:        @Given("I have {int} pounds of cucumbers of type {string} that cost me {double} dollars")
+                                public void i_have_pounds_of_cucumbers_of_type_that_cost_me_dollars(Integer int1, String string, Double double1) {
+
+                                }
+
+ If you need to specify information in a scenario that won't fit on a single line, you can use a DocString. (""" """)
+       When you use a doctring make sure to put each triple quote on its own line.
+       Ex: Scenario: Example scenario for Database
+           When I send the following query
+             """
+                select first_name,last_name,email,address,district,city,country from customer
+                join address
+                on customer.address_id = address.address_id
+                join city
+                on address.city_id  = city.city_id
+                join country
+                on city.country_id = country.country_id;
+              """
+
+   Cucumber Data Table - a cucumber feature that enables table-style data/collection to be passed from a SINGLE step of a Cucumber scenario into the step definition method
+                Example:
+                Given the user is on the homepage of the music streaming app
+                    When the user clicks on the “Browse” link in the sidebar
+                    Then the following albums should be displayed
+                      | Cruel Summer        |
+                      | Fenix               |
+                      | Werk                |
+                      | Marisa              |
+                      | Escape              |
+                      | Ultimatum           |
+                      | Oscillation         |
+                      | Clouds              |
+                      | I Am...Sasha Fierce |
+
+        The DataTable is added to the cucumber step definition method as a parameter, we simply need to replace it with corresponding Java data structure for automatic transformation.
+        The allowed types are List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V>  Map<K, List<V>> where E,K,V must be a String, Integer, Float, Double, Byte, Short, Long.
+        When Cucumber converts the DataTable into corresponding Java data structures (List, Map), it creates an unmodifiable version of these data structures. If you need to modify, you need to convert into a modifiable type.
 
 
 
