@@ -18,6 +18,9 @@ public class LoginPage {
     @FindBy (id = "loginUsername")
     private WebElement usernameField;
 
+    @FindBy (id = "hideLogin")
+    private WebElement signUpLink;
+
 
     public void login(){
        usernameField.
@@ -34,4 +37,6 @@ public class LoginPage {
                         password,
                         Keys.ENTER);
     }
+
+
 }

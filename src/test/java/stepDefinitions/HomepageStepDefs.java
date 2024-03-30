@@ -1,12 +1,11 @@
 package stepDefinitions;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import pages.HomePage;
 
-public class HomepageSteDefs {
+public class HomepageStepDefs {
 
     @Then("the user should see the homepage links")
     public void the_user_should_see_the_homepage_links() {
@@ -20,4 +19,13 @@ public class HomepageSteDefs {
          Assert.assertTrue(new HomePage().getWelcomeMessage().isDisplayed());
     }
 
+
+    @Then("the user should see {int} recommended albums")
+    public void the_user_should_see_recommended_albums(Integer albumCount) {
+
+      Integer actualCount =  new HomePage().getAllAlbums().size();
+
+      Assert.assertEquals(albumCount, actualCount);
+
+    }
 }

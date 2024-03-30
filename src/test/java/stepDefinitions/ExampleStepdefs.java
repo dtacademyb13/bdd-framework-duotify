@@ -4,6 +4,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.datatable.DataTable;
+
+import java.util.List;
 
 public class ExampleStepdefs {
 
@@ -39,6 +42,17 @@ public class ExampleStepdefs {
 
     }
 
+    @Then("I pass this SQL query")
+    public void i_pass_this_sql_query(String docString) {
+        System.out.println(docString);
+    }
 
+
+
+    @When("I pass the following user information")
+    public void i_pass_the_following_user_information(List<String> dataTable) {
+        System.out.println(dataTable);
+
+    }
 
 }

@@ -18,6 +18,11 @@ public class HomePage {
     @FindBy(xpath = "//nav[@class='navBar']//span[@class='navItemLink']")
     private List<WebElement> links;
 
-    @FindBy(tagName = "h6")
+    @FindBy(tagName = "h1")
     private WebElement welcomeMessage;
+
+    @FindBy(xpath = "//div[@class='gridViewContainer']//div[@class='gridViewInfo']")
+    private List<WebElement> allAlbums;
+
+
 }

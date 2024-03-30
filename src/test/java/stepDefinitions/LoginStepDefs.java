@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -59,4 +60,8 @@ public class LoginStepDefs {
     }
 
 
+    @And("The user clicks on the sign up link")
+    public void theUserClicksOnTheSignUpLink() {
+        new LoginPage().getSignUpLink().click();
+    }
 }
