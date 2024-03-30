@@ -8,6 +8,7 @@ Feature: Music Streaming App Homepage
   Background:
     Given the user is on the login page
     And the user enters valid username and password
+    And the user should not be directed to the personal dashboard
 
   @smoke
   Scenario: User opens the app and sees the welcome message

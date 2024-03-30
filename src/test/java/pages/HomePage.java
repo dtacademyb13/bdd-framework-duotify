@@ -1,6 +1,7 @@
 package pages;
 
 import lombok.Data;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -23,6 +24,11 @@ public class HomePage {
 
     @FindBy(xpath = "//div[@class='gridViewContainer']//div[@class='gridViewInfo']")
     private List<WebElement> allAlbums;
+
+
+    public void clickOnAlbum(String name){
+        Driver.getDriver().findElement(By.xpath("//div[@class='gridViewContainer']//div[@class='gridViewInfo'][.='"+name+"']")).click();
+    }
 
 
 }

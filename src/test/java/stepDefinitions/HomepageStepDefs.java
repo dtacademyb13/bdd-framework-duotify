@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
@@ -49,6 +50,12 @@ public class HomepageStepDefs {
 
         Assert.assertEquals(expectedAlbums, actualAlbumNames);
 
+
+
+    }
+
+    @And("the user is landed on the homepage")
+    public void theUserIsLandedOnTheHomepage() {
 
 
     }

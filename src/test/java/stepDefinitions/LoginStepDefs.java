@@ -28,7 +28,7 @@ public class LoginStepDefs {
     @Then("the user should be directed to the personal dashboard")
     public void theUserShouldBeDirectedToThePersonalDashboard() {
 
-        Assert.assertEquals("Welcome to Duotify!", Driver.getDriver().getTitle());
+        Assert.assertEquals("http://duotify.us-east-2.elasticbeanstalk.com/browse.php?", Driver.getDriver().getCurrentUrl());
 
     }
 

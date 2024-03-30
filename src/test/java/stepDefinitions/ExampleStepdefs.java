@@ -89,4 +89,34 @@ public class ExampleStepdefs {
         System.out.println(dataTable);
     }
 
+    @Given("I have {int} cucumbers and {string}")
+    public void i_have_cucumbers_and(Integer count, String string) {
+        System.out.println(count);
+    }
+    @When("I sell {int} of the cucumbers")
+    public void i_sell_of_the_cucumbers(Integer sold) {
+        System.out.println(sold);
+    }
+    @Then("I should have {int} left")
+    public void i_should_have_left(Integer int1) {
+        System.out.println(int1);
+    }
+
+    int count;
+    @Given("I have {int} cucumbers")
+    public void iHaveCucumbers(int count) {
+        this.count = count;
+    }
+
+    int sold;
+    @When("I sell {int}  cucumbers")
+    public void iSellCucumbers(int sold) {
+       this.sold = sold;
+    }
+
+    @Then("I should have the correct amount left")
+    public void iShouldHaveTheCorrectAmountLeft() {
+        System.out.println("The amount left is: " + (this.count-this.sold));
+
+    }
 }

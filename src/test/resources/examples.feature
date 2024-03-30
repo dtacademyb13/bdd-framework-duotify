@@ -110,15 +110,34 @@ Feature: Examples of cucumber features
 #    table can be represented as Map<String, List<String>>
 
 
-  @test
+
   Scenario: Cucumber Data Table common mistakes
 
     When I pass the following user information as a list
 #        DON'T DO THIS
       | duotech9999 | Duotech | Academy | duotech2029@gmail.com | duotech2024 |
 
+  @test
+  Scenario Outline: Cucumber Scenario Outline Demo
+
+    Given I have <count> cucumbers and "<fruit>"
+    When I sell <portion> of the cucumbers
+    Then I should have <finalAmount> left
+
+    Examples:
+      | count | fruit   | portion | finalAmount |
+      | 10    | apples  | 2       | 8           |
+      | 20    | bananas | 5       | 15          |
+      | 3     | kiwis   | 3       | 0           |
 
 
+
+
+   @sharingData
+  Scenario: Sharing data
+    Given I have 100 cucumbers
+    When I sell 73  cucumbers
+    Then I should have the correct amount left
 
 
 

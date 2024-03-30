@@ -36,5 +36,16 @@ Feature: User login for Music Streaming App
     When the user enters valid username as "duotech2050" and password as "duotech123"
     Then the user should be directed to the personal dashboard
 
+  @data-driven
+  Scenario Outline: Successful login wih a valid username and password as scenario outline
+    When the user enters valid username as "<username>" and password as "<password>"
+    Then the user should be directed to the personal dashboard
+    Examples:
+      | username     | password   |
+      | duotech2023  | duotech    |
+      | duotech2050  | duotech123 |
+      | coolherc2023 | coolherc1  |
+
+
 
 
