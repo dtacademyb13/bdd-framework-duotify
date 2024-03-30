@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import io.cucumber.datatable.DataTable;
 
 import java.util.List;
+import java.util.Map;
 
 public class ExampleStepdefs {
 
@@ -55,4 +56,9 @@ public class ExampleStepdefs {
 
     }
 
+    @When("I pass the following user information map")
+    public void iPassTheFollowingUserInformationMap(Map<String,String> map) {
+
+        System.out.println(map);
+    }
 }

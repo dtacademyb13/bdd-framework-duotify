@@ -14,7 +14,7 @@ Feature: User sign up
     When The user fills up the fields with valid info such as "duotech9999" "Duotech" "Academy" "duotech2029@gmail.com" "duotech2024"
     Then The user should be able to sign up successfully
 
-  @signup
+
   Scenario: Sign up with valid information with datatable
     When The user fills up the fields with the following info
       | duotech9998           |
@@ -22,6 +22,16 @@ Feature: User sign up
       | Academy               |
       | duotech2028@gmail.com |
       | duotech2024           |
+    Then The user should be able to sign up successfully
+
+  @signup
+  Scenario: Sign up with valid information with datatable 2
+    When The user fills up the fields with the following info as
+      | username   | duotech9990           |
+      | firstName | Duotech               |
+      | lastName  | Academy               |
+      | email      | duotech2067@gmail.com |
+      | password   | duotech2024           |
     Then The user should be able to sign up successfully
 
 

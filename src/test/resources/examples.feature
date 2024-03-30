@@ -59,3 +59,15 @@ Feature: Examples of cucumber features
       | duotech2024           |
 
 #    single column represents List
+
+  @test
+  Scenario: Cucumber Data Table as Map
+
+    When I pass the following user information map
+      | username   | duotech9990           |
+      | firstName | Duotech               |
+      | lastName  | Academy               |
+      | email      | duotech2067@gmail.com |
+      | password   | duotech2024           |
+
+#    two columns represent Map
