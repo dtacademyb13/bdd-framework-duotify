@@ -1,7 +1,9 @@
 package stepDefinitions;
 
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import pages.AlbumDetailsPage;
 import pages.HomePage;
@@ -21,9 +23,17 @@ public class AlbumStepDefs {
         AlbumDetailsPage albumDetailsPage = new AlbumDetailsPage();
 
         String actualAlbumName = albumDetailsPage.getAlbumName().getText();
-        Assert.assertEquals(expectedDataAsMap.get("name"),actualAlbumName);
-        Assert.assertEquals(expectedDataAsMap.get("author"),albumDetailsPage.getAuthor().getText().substring(3));
-        Assert.assertEquals(expectedDataAsMap.get("songCount"),albumDetailsPage.getSongCount().getText().split(" ")[0]);
+
+        SoftAssertions softAssertions = new SoftAssertions();
+
+        softAssertions.assertThat(actualAlbumName+"ds").isEqualTo(expectedDataAsMap.get("name"));
+        softAssertions.assertThat(albumDetailsPage.getAuthor().getText().substring(3)).isEqualTo(expectedDataAsMap.get("author"));
+        softAssertions.assertThat(albumDetailsPage.getSongCount().getText().split(" ")[0] +"cds").isEqualTo(expectedDataAsMap.get("songCount"));
+
+        softAssertions.assertAll();
+//        Assert.assertEquals(expectedDataAsMap.get("name"),actualAlbumName);
+//        Assert.assertEquals(expectedDataAsMap.get("author"),albumDetailsPage.getAuthor().getText().substring(3));
+//        Assert.assertEquals(expectedDataAsMap.get("songCount"),albumDetailsPage.getSongCount().getText().split(" ")[0]);
 
 
 
@@ -40,4 +50,10 @@ public class AlbumStepDefs {
         Assert.assertEquals(expectedData.get(0).get("songCount"),albumDetailsPage.getSongCount().getText().split(" ")[0]);
 
     }
+
+
+//    @Given("I have some pre-requisites")
+//    public void i_have_some_pre_requisites() {
+////        throw new io.cucumber.java.PendingException();
+//    }
 }

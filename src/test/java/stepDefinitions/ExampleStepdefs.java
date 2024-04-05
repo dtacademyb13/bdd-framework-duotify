@@ -119,4 +119,34 @@ public class ExampleStepdefs {
         System.out.println("The amount left is: " + (this.count-this.sold));
 
     }
+
+
+    @Given("I have some pre-requisites")
+    public void i_have_some_pre_requisites() {
+//        throw new io.cucumber.java.PendingException();
+    }
+    @When("I perform some action")
+    public void i_perform_some_action() {
+    }
+    @Then("I should have the expected result")
+    public void i_should_have_the_expected_result() {
+    }
+
+//    @When("I sell {int} bananas")
+//    public void i_sell_bananas(Integer int1) {
+//
+//    }
+
+    @When("I sell {long} bananas")
+    public void i_sell_bananas2(Long long1) {
+
+    }
+
+//    @When("I consume lots of {string}")
+//    public void iConsumeLotsOf(String cukes) {
+//    }
+
+    @And("I consume lots of {word}")
+    public void iConsumeLotsOfTomatoes(String word) {
+    }
 }

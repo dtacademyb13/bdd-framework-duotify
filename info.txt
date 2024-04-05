@@ -121,4 +121,34 @@ Cucumber parametrized step enables the step to be used multiple times with diffe
         When Cucumber converts the DataTable into corresponding Java data structures (List, Map), it creates an unmodifiable version of these data structures. If you need to modify, you need to convert into a modifiable type.
 
 
+What is the difference between Cucumber Data Table and Scenario Outline’s Examples table?
 
+SCOPE: Data Table belongs to a single step of a scenario whereas Examples table belongs to the entire Scenario Outline.
+USAGE: We use Data Table when we want to pass table-style data (multiple sets of data) into a single step, in other words instead of passing large number of parameters separately we can pass them as single data structure like List, Map, etc
+       We use Examples table with Scenario Outline when we want to run the same scenario multiple times with different input, .i.e implement data-driven testing
+
+
+What are some common Cucumber exceptions?
+
+UndefinedStepException -  when a scenario step does not have matching step definition method
+PendingException - default exception that is added to each step definition snippet to mark that step as pending implementation
+DuplicateStepDefinitionException - happens when there are more than one step definitions with the exactly matching text
+AmbiguousStepDefinitionsException - this happens when one step has more than one matching step definitions due to parameters
+                                     {string} and {word} or {int} and {long} or {float} and {double}
+
+
+
+ Cucumber comes with built-in Junit 4 by default and it does not have soft assertions.
+ Hence we can use AssertJ library to implement soft assertions:
+                   <dependency>
+                       <groupId>org.assertj</groupId>
+                       <artifactId>assertj-core</artifactId>
+                       <version>3.25.3</version>
+                       <scope>test</scope>
+                   </dependency>
+            Ex:
+                 SoftAssertions softAssertions = new SoftAssertions();
+                 softAssertions.assertThat(“actual”).isEqualTo(“expected”);
+                 softAssertions.assertThat(“actual2”).isEqualTo(“expected2");
+                 softAssertions.assertThat(“actual3”).isEqualTo(“expected3");
+                 softAssertions.assertAll();

@@ -6,7 +6,7 @@ Feature: Album features
     And the user enters valid username and password
     And the user should be directed to the personal dashboard
 
-
+ @softAssertions
   Scenario: Verify album details
 
     When the user clicks on the album "Cruel Summer"
@@ -45,6 +45,10 @@ Feature: Album features
 
 
 
+
+
+  Scenario: Exceptions demo
+    Given I have some pre-requisites
 #
 #  Scenario: Verify album songs details
 #    Given the user is on the homepage of the music streaming app

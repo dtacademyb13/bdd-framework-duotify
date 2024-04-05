@@ -64,11 +64,11 @@ Feature: Examples of cucumber features
   Scenario: Cucumber Data Table as Map
 
     When I pass the following user information map
-      | username   | duotech9990           |
+      | username  | duotech9990           |
       | firstName | Duotech               |
       | lastName  | Academy               |
-      | email      | duotech2067@gmail.com |
-      | password   | duotech2024           |
+      | email     | duotech2067@gmail.com |
+      | password  | duotech2024           |
 
 #    two columns represent Map
 
@@ -103,9 +103,9 @@ Feature: Examples of cucumber features
 
     When I pass the following user information map with value as list
 
-     | 123-09-3452 | Annie M. G. | Schmidt  | 1911-03-20 |
-     | 532-23-4342  | Roald       | Dahl     | 1916-09-13 |
-     | 323-43-4343  | Astrid      | Lindgren | 1907-11-14 |
+     | 1 | Annie M. G. | Schmidt  | 1911-03-20 |
+     | 2 | Roald       | Dahl     | 1916-09-13 |
+     | 3  | Astrid      | Lindgren | 1907-11-14 |
 
 #    table can be represented as Map<String, List<String>>
 
@@ -139,5 +139,16 @@ Feature: Examples of cucumber features
     When I sell 73  cucumbers
     Then I should have the correct amount left
 
+@demo
+  Scenario: Exceptions demo
+  #  Example of a duplicate step definition exception
+  Given I have some pre-requisites
+    When I perform some action
+    Then I should have the expected result
+#  Example of an ambiguous step definition exception
+   When I sell 5 bananas
+   And I sell 5000000000 bananas
+  When I consume lots of "cucumbers"
+  And I consume lots of tomatoes
 
 
