@@ -1,3 +1,4 @@
+@REGRESSION
 Feature: User sign up
 
   Background: Common steps for all scenarios

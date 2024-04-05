@@ -9,11 +9,8 @@ import utilities.Driver;
 import java.util.List;
 
 @Data
-public class AlbumDetailsPage {
+public class AlbumDetailsPage extends BasePage{ // example of using inheritance in the framework
 
-    public AlbumDetailsPage(){
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
 
     @FindBy(tagName = "h2")
     private WebElement albumName;

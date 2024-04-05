@@ -11,7 +11,7 @@ BBD Framework Building Steps:
 9. Generate the step definition snippets
 10. Implement the code for each step definition
 11. Run the scenario by tagging it with a tag
-12.
+12. Repeat steps 7-11
 
 
 In Cucumber framework:
@@ -152,3 +152,81 @@ AmbiguousStepDefinitionsException - this happens when one step has more than one
                  softAssertions.assertThat(“actual2”).isEqualTo(“expected2");
                  softAssertions.assertThat(“actual3”).isEqualTo(“expected3");
                  softAssertions.assertAll();
+
+
+Parallel and cross-browser tests can be implemented in following ways:
+
+1. Selenium Grid: server that automatically runs your tests in distributed mode on multiple browsers,operating systems, platforms
+   Requires complex installation and configuration.
+   I used Selenium Grid by sending the framework tests to a remote server url using RemoteWebDriver.
+2. Using third-party cloud providers such as SauceLabs, BrowserStack.
+   Requires subscription and costs money.
+3. Implement running cross-browser and parallel tests natively in your framework.
+   Requires powerful server to run the tests.
+
+How to implement parallel tests in Cucumber?
+
+We can enable parallel test in Cucumber natively with JUnit 4.
+But we need to remember that with this option you can run only FEATURES in parallel.
+If there is a need for running SCENARIOS in parallel, you can incorporate TestNG , but that requires extra configuration and setup.
+
+Steps to implement running parallel Features in Cucumber with Junit:
+1. Determine the scope of the feature files that you want to run in parallel in your runner class
+   features = “src/test/resources”
+  Optionally create a separate folder for feature files that you want to run in parallel and indicate that path
+   features = “src/test/resources/parallel”
+2.Add these 2 options under the <configuration> tag of Maven Surefire plugin:
+                       <parallel>methods</parallel>
+                       <useUnlimitedThreads>true</useUnlimitedThreads>
+3.If you need to limit the number of threads:
+         <threadCount>3</threadCount>
+         <perCoreThreadCount>false</perCoreThreadCount>
+4. You need to run tests in terminal for parallelism to be enabled since we are using surefire plugin to configure parallelism
+
+
+Tell me about your framework?
+
+General description -> components -> architecture -> more details (packages, classes)
+
+Sample:
+It is a Cucumber BDD test automation framework that allows us to write test cases in Gherkin format
+  as Cucumber scenarios which is understandable to all participants.
+  The framework's tech stack includes Java, Cucumber, Gherkin, JUnit, Selenium, JDBC, RestAssured, Maven, Faker, Lombok, AssertJ.
+  My framework is built with using Page Object Model design pattern for easy maintenance and scalability.
+  Besides, I also used Page Factory pattern for my page classes and Singleton pattern for my Driver class.
+  My framework structure consists of packages for page classes, runner classes, step definition classes and hooks, utilities and features files.
+  In my framework the cucumber feature files are connected to the step definition classes through a runner class where all test run configuration is added.
+
+Cucumber BDD Framework components:
+    Java - programming language to write code
+    Selenium - to automate UI scenarios
+    Junit - organize, configure, and execute tests.
+    Maven - define the project structure, manage dependencies, run tests through command line via surefire plugin
+    Faker - generate mock data for data driven testing
+    Lombok - generate getter and setters automatically for page classes
+    AssertJ - enable soft assertions since Junit does not offer them
+    .gitignore file - to exclude non-project related files from being version controlled (tracked and pushed to GitHub)
+    config.properties file - to store project’s global variables such as env variables, usernames, passwords, paths, etc.
+    Utility Classes - classes that support our automated tests
+    Reports - are implemented with Cucumber’s own built in HTML report
+
+Architecture:
+       -Design patterns used: Page Object Model and Page Factory, Singleton
+       -OOP Principles used:
+           - Encapsulation - I used it my page classes by making webelements private and provide public getters
+           - Inheritance - I used it in my page classes by creating a parent class and adding all common webelements there and extending subclasses from that super class
+           - I haven’t implemented Abstraction or Polymorphism in any of my code since I had no need for them. But I can give you examples of them in my framework code.
+             Polymorphism ->  WebDriver driver = new ChromeDriver()
+             Abstraction -> WebDriver, WebElement, Alert, JavaScriptExecutor, TakesScreenshot
+
+Types of tests the framework supports:
+    Functional,
+    Smoke,
+    Regression,
+    Integration,
+    UI, API, DB
+    Cross Browser,
+    Headless,
+    Parallel,
+    Data-Driven tests
+    End-to-end tests

@@ -83,7 +83,11 @@
                     <version>3.2.5</version>
                     <configuration>
                         <includes>CucumberRunner.java</includes>
-
+<!--                        These 2 lines must be added when running scenarios in parallel through cmd-->
+<!--                        <parallel>methods</parallel>-->
+<!--&lt;!&ndash;                        <useUnlimitedThreads>true</useUnlimitedThreads>&ndash;&gt;-->
+<!--                        <threadCount>3</threadCount>-->
+<!--                        <perCoreThreadCount>false</perCoreThreadCount>-->
 <!--                        when you need to pass different runner classes from command line-->
 <!--                        <includes>${runner}</includes>-->
                     </configuration>

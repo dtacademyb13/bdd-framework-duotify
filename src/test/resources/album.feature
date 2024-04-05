@@ -1,3 +1,5 @@
+
+@REGRESSION
 Feature: Album features
 
 
