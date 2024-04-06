@@ -1,9 +1,12 @@
 package stepDefinitions;
 
+import com.github.javafaker.Faker;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.SignupPage;
+import utilities.DBUtils;
 import utilities.Driver;
 
 import java.util.List;
@@ -12,9 +15,20 @@ import java.util.Set;
 
 public class SignUpStepDefs {
 
+    String username;
     @When("The user fills up the fields with valid info")
     public void the_user_fills_up_the_fields_with_valid_info() {
-         new SignupPage().signUpWithRandomData();
+        SignupPage signupPage = new SignupPage();
+        Faker faker=  new Faker();
+        username = faker.name().username();
+        String first = faker.name().firstName();
+        String last = faker.name().lastName();
+        String email = faker.internet().emailAddress();
+        String pass = faker.internet().password();
+        signupPage.signUp(
+                username, first,last, email,pass
+                );
+
     }
 
     @When("The user fills up the fields with valid info such as {string} {string} {string} {string} {string}")
@@ -52,4 +66,17 @@ public class SignUpStepDefs {
     }
 
 
+    @And("the user should be created in the database")
+    public void theUserShouldBeCreatedInTheDatabase() {
+
+        String query ="SELECT * FROM users where username='" + username + "'";
+        System.out.println(query);
+        List<List<Object>> result = DBUtils.getQueryResultAsListOfLists(query);
+
+        System.out.println(result);
+
+        Assert.assertTrue(!result.isEmpty());
+
+
+    }
 }

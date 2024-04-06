@@ -1,11 +1,12 @@
 package pages;
 
 import com.github.javafaker.Faker;
+import lombok.Data;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
-
+@Data
 public class SignupPage {
 
     public SignupPage(){

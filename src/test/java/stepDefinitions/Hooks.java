@@ -4,6 +4,7 @@ import io.cucumber.java.*;
 import io.cucumber.java.en.Then;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import utilities.DBUtils;
 import utilities.Driver;
 import utilities.SeleniumUtils;
 
@@ -14,6 +15,7 @@ public class Hooks {
 
     @Before ()
     public void setupScenario(){
+        DBUtils.createConnection();
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         Driver.getDriver().manage().window().maximize();
     }
@@ -34,6 +36,7 @@ public class Hooks {
         }
 
         Driver.quitDriver();
+        DBUtils.close();
     }
 
 
