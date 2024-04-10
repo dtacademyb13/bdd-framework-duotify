@@ -1,15 +1,22 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import pages.LoginPage;
 import utilities.ConfigReader;
+import utilities.DBUtils;
 import utilities.Driver;
+
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class LoginStepDefs {
 
@@ -63,5 +70,44 @@ public class LoginStepDefs {
     @And("The user clicks on the sign up link")
     public void theUserClicksOnTheSignUpLink() {
         new LoginPage().getSignUpLink().click();
+    }
+
+
+    public static void main(String[] args) {
+
+
+
+    }
+
+    String username;
+    String password;
+    @Given("the user with random credentials is created in the db")
+    public void the_user_with_random_credentials_is_created_in_the_db() throws SQLException {
+
+        Faker faker = new Faker();
+         username  = faker.name().username();
+         password = faker.internet().password();
+        String query = String.format("INSERT INTO users (username, firstName, lastName, email, password, signUpDate, profilePic)\n" +
+                        "VALUES            ('%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+                username,
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.internet().emailAddress(),
+                DigestUtils.md5Hex(password),
+                LocalDateTime.now(),
+                "assets/images/profile-pics/head_"
+        );
+
+        System.out.println(query);
+
+
+
+        DBUtils.executeUpdate(query);
+
+    }
+    @When("the user enters the same credentials")
+    public void the_user_enters_the_same_credentials() {
+
+          new LoginPage().login(username, password);
     }
 }

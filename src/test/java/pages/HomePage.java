@@ -31,4 +31,21 @@ public class HomePage {
     }
 
 
+    @FindBy (id = "nameFirstAndLast")
+    private WebElement username;
+
+    @FindBy (xpath = "//button[.='USER DETAILS']")
+    private WebElement userDetailsButton;
+
+
+    public void clickOnLink(String name){
+        String xpath = "//span[@class='navItemLink'][contains(text(), '"+name+"')]";
+      Driver.getDriver().findElement(By.xpath(xpath)).click();
+    }
+
+
+
+
+
+
 }

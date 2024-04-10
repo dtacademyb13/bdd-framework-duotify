@@ -1,4 +1,4 @@
-package stepDefinitions;
+package stepDefinitions.ui;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -149,4 +149,10 @@ public class ExampleStepdefs {
     @And("I consume lots of {word}")
     public void iConsumeLotsOfTomatoes(String word) {
     }
+
+
+
+
+
+
 }
