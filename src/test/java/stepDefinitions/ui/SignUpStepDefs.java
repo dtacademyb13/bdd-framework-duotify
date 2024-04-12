@@ -8,34 +8,37 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import pages.SignupPage;
+import stepDefinitions.SharedData;
+import stepDefinitions.db.CrudOperationsStepDefs;
 import utilities.DBUtils;
 import utilities.Driver;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class SignUpStepDefs {
 
-    String username;
-    String first;
-    String last;
+    SharedData sharedData;
 
-    String email;
+    public SignUpStepDefs(SharedData sharedData) {
+        this.sharedData = sharedData;
+    }
 
-    String pass;
+
 
     @When("The user fills up the fields with valid info")
     public void the_user_fills_up_the_fields_with_valid_info() {
         SignupPage signupPage = new SignupPage();
         Faker faker=  new Faker();
-        username = faker.name().username();
-        first = faker.name().firstName();
-        last = faker.name().lastName();
-         email = faker.internet().emailAddress();
-         pass = faker.internet().password();
+        sharedData.setUsername(faker.name().username());
+        sharedData.setFirst(faker.name().firstName());
+        sharedData.setLast(faker.name().lastName());
+        sharedData.setEmail(faker.internet().emailAddress());
+        sharedData.setPass(faker.internet().password());
         signupPage.signUp(
-                username, first,last, email,pass
+                sharedData.getUsername(),sharedData.getFirst(),sharedData.getLast(), sharedData.getEmail(),sharedData.getPass()
                 );
 
     }
@@ -78,7 +81,7 @@ public class SignUpStepDefs {
     @And("the user should be created in the database")
     public void theUserShouldBeCreatedInTheDatabase() {
 
-        String query ="SELECT * FROM users where username='" + username + "'";
+        String query ="SELECT * FROM users where username='" + sharedData.getUsername() + "'";
         System.out.println(query);
         List<List<Object>> result = DBUtils.getQueryResultAsListOfLists(query);
 
@@ -92,7 +95,7 @@ public class SignUpStepDefs {
     @Then("the user's info should be correct")
     public void the_user_s_info_should_be_correct() {
 
-        String query ="SELECT * FROM users where username='" + username + "'";
+        String query ="SELECT * FROM users where username='" + sharedData.getUsername() + "'";
 
         System.out.println(query);
         List<Map<String, Object>> result = DBUtils.getQueryResultListOfMaps(query);
@@ -102,12 +105,12 @@ public class SignUpStepDefs {
         Map<String, Object> data = result.get(0);
 
         SoftAssertions softAssertions = new SoftAssertions();
-        softAssertions.assertThat(data.get("username")).isEqualTo(username);
-        softAssertions.assertThat(data.get("firstName")).isEqualTo(first);
-        softAssertions.assertThat(data.get("lastName")).isEqualTo(last);
+        softAssertions.assertThat(data.get("username")).isEqualTo(sharedData.getUsername());
+        softAssertions.assertThat(data.get("firstName")).isEqualTo(sharedData.getFirst());
+        softAssertions.assertThat(data.get("lastName")).isEqualTo(sharedData.getLast());
 //        softAssertions.assertThat(data.get("email")).isEqualTo(email); //email is stored as capitalized
 
-        String passwordInMD5 = DigestUtils.md5Hex(pass);
+        String passwordInMD5 = DigestUtils.md5Hex(sharedData.getPass());
 
         System.out.println(passwordInMD5);
 
@@ -122,6 +125,8 @@ public class SignUpStepDefs {
 
 
     }
+
+
 
 
 }

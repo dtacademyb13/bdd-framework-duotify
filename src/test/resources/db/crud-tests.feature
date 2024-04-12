@@ -55,7 +55,7 @@ Feature:  CRUD Tests
     Then the user should be directed to the personal dashboard
 
 
-  @db_to_ui_crud
+
   Scenario: User Email update CRUD test - Update - DB to UI
 #    Update the email for the test user to a specific email
     Given the user email is updated in the db
@@ -64,4 +64,16 @@ Feature:  CRUD Tests
     And the user enters valid username and password
     Then the user should be directed to the personal dashboard
     Then the updated user email should be correct
+
+
+  @db_to_ui_crud
+  Scenario: User Playlist Deletion CRUD test - Delete -DB to UI
+#    Create and delete a playlist in the DB
+    Given the a new playlist is created for the test user in the DB
+    When the same playlist is deleted in the database
+#    Verify the playlist does not exist through the UI
+    Given the user is on the login page
+    When the user enters valid username and password
+    Then the user should be directed to the personal dashboard
+    Then the user should not see the same playlist
 

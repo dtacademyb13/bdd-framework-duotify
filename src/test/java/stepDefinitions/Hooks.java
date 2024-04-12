@@ -13,11 +13,22 @@ import java.time.Duration;
 public class Hooks {
 
 
-    @Before ()
+    @Before ("not @db_only")
     public void setupScenario(){
         DBUtils.createConnection();
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         Driver.getDriver().manage().window().maximize();
+    }
+
+
+    @Before ("@db_only")
+    public void db(){
+        DBUtils.createConnection();
+    }
+
+    @After ("@db_only")
+    public void db2(){
+        DBUtils.close();
     }
 
     //Tagged Hook example
@@ -29,7 +40,7 @@ public class Hooks {
 //        Driver.getDriver().manage().deleteAllCookies();
 //    }
 
-    @After
+    @After ("not @db_only")
     public void tearDownScenario(Scenario scenario){
         if(scenario.isFailed()){
             scenario.attach(((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES), "image/png", "failed");

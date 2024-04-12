@@ -9,6 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 import utilities.SeleniumUtils;
 
+import java.util.List;
+
 @Data
 public class PlaylistsPage {
 
@@ -19,6 +21,9 @@ public class PlaylistsPage {
 
     @FindBy(xpath = "//button[.='NEW PLAYLIST']")
     private WebElement newPlaylistButton;
+
+    @FindBy(css = "div.gridViewInfo")
+    private List<WebElement> allPlaylists;
 
 
     public void createPlaylist(String playlistName) throws InterruptedException {
