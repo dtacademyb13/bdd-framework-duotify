@@ -1,4 +1,6 @@
-package utilities;
+package utilities.demo;
+
+import utilities.ConfigReader;
 
 import java.sql.*;
 import java.util.ArrayList;

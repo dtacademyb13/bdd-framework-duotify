@@ -1,4 +1,6 @@
-package utilities;
+package utilities.demo;
+
+import utilities.DBUtils;
 
 import java.sql.SQLException;
 import java.util.List;
