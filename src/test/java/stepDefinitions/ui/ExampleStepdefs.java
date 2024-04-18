@@ -1,15 +1,27 @@
 package stepDefinitions.ui;
 
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.datatable.DataTable;
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import stepDefinitions.SharedData;
+import utilities.Driver;
 
 import java.util.List;
 import java.util.Map;
 
 public class ExampleStepdefs {
+
+
+    SharedData sharedData;
+
+    public ExampleStepdefs(SharedData sharedData){
+        this.sharedData = sharedData;
+    }
 
 
     @Given("I have {int} cucumbers in my belly")
@@ -151,8 +163,27 @@ public class ExampleStepdefs {
     }
 
 
+    @Given("I create user with some details on the UI")
+    public void iCreateUserWithSomeDetailsOnTheUI() {
+        Faker faker = new Faker();
+
+        sharedData.setUsername(faker.name().username());
+        sharedData.setEmail(faker.internet().emailAddress());
+        sharedData.setPass(faker.internet().password());
+
+
+
+    }
 
 
 
 
+
+    @Then("I should have the correct info")
+    public void iShouldHaveTheCorrectInfo() {
+
+        Assert.assertEquals("someExpected" , sharedData.getUsername());
+        Assert.assertEquals("someExpected" , sharedData.getEmail());
+        Assert.assertEquals("someExpected" , sharedData.getPass());
+    }
 }

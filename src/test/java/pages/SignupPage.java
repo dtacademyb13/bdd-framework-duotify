@@ -5,9 +5,13 @@ import lombok.Data;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import stepDefinitions.SharedData;
 import utilities.Driver;
 @Data
 public class SignupPage {
+
+
+
 
     public SignupPage(){
         PageFactory.initElements(Driver.getDriver(), this);

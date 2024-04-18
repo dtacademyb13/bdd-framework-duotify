@@ -152,3 +152,13 @@ Feature: Examples of cucumber features
   And I consume lots of tomatoes
 
 
+  @sharingData
+  Scenario: Sharing data
+    Given I create user with some details on the UI
+    When I retrieve the same user with the username from the db
+    Then I should have the correct info
+
+
+
+
+

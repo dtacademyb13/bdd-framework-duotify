@@ -45,7 +45,9 @@ public class SignUpStepDefs {
 
     @When("The user fills up the fields with valid info such as {string} {string} {string} {string} {string}")
     public void the_user_fills_up_the_fields_with_valid_info_such_as(String user, String f, String l, String e, String p) {
-         new SignupPage().signUp(user, f, l, e, p);
+
+
+        new SignupPage().signUp(user, f, l, e, p);
     }
 
 
