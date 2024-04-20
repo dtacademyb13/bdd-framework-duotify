@@ -7,7 +7,8 @@
         
 
        <classes>
-           <class name="utilities.demo.RestAssuredBasics"></class>
+           <class name="apiTestsTDD.RestAssuredBasics"/>
+           <class name="apiTestsTDD.RestAssuredBasicsDuotify"/>
        </classes>
 
 

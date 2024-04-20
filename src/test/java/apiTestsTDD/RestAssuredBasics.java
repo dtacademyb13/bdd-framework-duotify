@@ -1,4 +1,4 @@
-package utilities.demo;
+package apiTestsTDD;
 
 import static io.restassured.RestAssured.*;
 

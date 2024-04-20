@@ -4,10 +4,16 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.sl.In;
 import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.openqa.selenium.json.Json;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
+import utilities.ConfigReader;
+import utilities.Driver;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -179,11 +185,53 @@ public class RestAssuredBasicsDuotify {
     public void testDELETE_USER(){
 
 
+        // Create a user
+
+        Faker faker = new Faker();
+
+        String username = faker.name().username() + System.currentTimeMillis();
+        String email = faker.internet().emailAddress();
+        String password = faker.internet().password();
+        String first = faker.name().firstName();
+        String last = faker.name().lastName();
+
+
+
+        String formattedBody =  String.format("""
+                        {
+                          "username": "%s",
+                          "firstName": "%s",
+                          "lastName": "%s",
+                          "email": "%s",
+                          "password": "%s"
+                        }
+                        """, username, first, last, email,password);
+
+        System.out.println(formattedBody);
+
+
+        Response response = given().
+                body(formattedBody).
+                header("Accept", "application/json").
+                header("Content-type", "application/json").
+                queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
+                when().
+                log().all().
+                post("/user").
+                then().
+                log().all().
+                statusCode(201).extract().response();
+
+        Integer id = response.path("user_id");
+
+
+        // Extract the created user's user_id and delete the user by this id
+
         given().
 
                 header("Accept", "application/json").
                 queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
-                queryParam("id", "1709883855").
+                queryParam("id", id).
                 when().
                 log().all().
                 delete("/user").
@@ -331,6 +379,184 @@ public class RestAssuredBasicsDuotify {
                 body("lastName", is(last)).
                 body("email", is(email));
 //                body("createdAt", is(LocalDateTime.now()));
+
+
+    }
+
+
+
+
+    @Test
+    public void horizontalEndtoEndTest(){
+
+        // Create a user with POST
+
+        Faker faker = new Faker();
+        String username = faker.name().username()+UUID.randomUUID();
+        String email = faker.internet().emailAddress();
+        String password = faker.internet().password();
+        String first = faker.name().firstName();
+        String last = faker.name().lastName();
+
+        String formattedBody =  String.format("""
+                        {
+                          "username": "%s",
+                          "firstName": "%s",
+                          "lastName": "%s",
+                          "email": "%s",
+                          "password": "%s"
+                        }
+                        """, username, first, last, email,password);
+
+
+     Integer extractedUserId =   given().
+                body(formattedBody).
+                header("Accept", "application/json").
+                header("Content-type", "application/json").
+                queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
+                when().
+                log().all().
+                post("/user").
+                then().
+                log().all().
+                statusCode(201).extract().path("user_id"); // you can extract body values with path(jsonPath expression)
+
+
+        // Verify user creation with GET
+
+        given().
+                header("Accept", "application/json").
+                queryParam("id", extractedUserId). //user ID from the POST request body is passed as a query param of GET request
+                queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
+                when().
+                log().all(). // log the request details
+                get("/user").
+                then().
+                log().all().
+                statusCode(200);
+
+        // Update the user with PATCH
+
+
+        String newFirstName = faker.name().firstName();
+        String newLastName = faker.name().lastName();
+
+        given().
+                body( String.format("""
+                        {
+                          "firstName": "%s",
+                          "lastName": "%s"
+                        }
+                        """, newFirstName,newLastName)).
+                header("Accept", "application/json").
+                header("Content-type", "application/json").
+                queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
+                queryParam("id", extractedUserId).
+                when().
+                log().all().
+                patch("/user").
+                then().
+                log().all().
+                statusCode(200);
+
+
+
+        // Verify the update with GET
+
+        given().
+                header("Accept", "application/json").
+                queryParam("id", extractedUserId). //user ID from the POST request body is passed as a query param of GET request
+                queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
+                when().
+                log().all(). // log the request details
+                get("/user").
+                then().
+                log().all().
+                statusCode(200).
+                body("firstName" , equalTo(newFirstName)).
+                body("lastName" , equalTo(newLastName));
+
+
+        // Delete the user with DELETE
+
+
+        given().
+
+                header("Accept", "application/json").
+                queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
+                queryParam("id", extractedUserId).
+                when().
+                log().all().
+                delete("/user").
+                then().
+                log().all().
+                statusCode(200);
+
+
+
+        // Verify the user deletion with GET
+
+        given().
+                header("Accept", "application/json").
+                queryParam("id", extractedUserId). //user ID from the POST request body is passed as a query param of GET request
+                queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
+                when().
+                log().all().
+                get("/user").
+                then().
+                log().all().
+                statusCode(404);
+
+
+
+    }
+
+
+    @Test
+    public void verticalEndToEndTest(){
+
+
+        // Create a user with POST
+
+        Faker faker = new Faker();
+        String username = faker.name().username();
+        String email = faker.internet().emailAddress();
+        String password = faker.internet().password();
+        String first = faker.name().firstName();
+        String last = faker.name().lastName();
+
+        String formattedBody =  String.format("""
+                        {
+                          "username": "%s",
+                          "firstName": "%s",
+                          "lastName": "%s",
+                          "email": "%s",
+                          "password": "%s"
+                        }
+                        """, username, first, last, email,password);
+
+
+         given().
+                body(formattedBody).
+                header("Accept", "application/json").
+                header("Content-type", "application/json").
+                queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
+                when().
+                log().all().
+                post("/user").
+                then().
+                log().all().
+                statusCode(201);
+
+        // Log in using the details of the post on the UI
+
+        Driver.getDriver().get(ConfigReader.getProperty("url"));
+
+        new LoginPage().login(username,password);
+
+        Assert.assertEquals("http://duotify.us-east-2.elasticbeanstalk.com/browse.php?", Driver.getDriver().getCurrentUrl());
+
+        Driver.quitDriver();
 
 
     }
