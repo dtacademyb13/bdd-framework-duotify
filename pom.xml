@@ -98,6 +98,16 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.1</version>
+            <scope>test</scope>
+        </dependency>
+
+
+
+
 
 
     </dependencies>

@@ -3,7 +3,10 @@ package utilities.demo;
 import static io.restassured.RestAssured.*;
 
 import io.restassured.RestAssured;
-import org.junit.Test;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import org.testng.annotations.Test;
+
 
 public class RestAssuredBasics {
 
@@ -35,9 +38,6 @@ public class RestAssuredBasics {
 
 
 
-
-
-
     }
 
     @Test
@@ -46,8 +46,10 @@ public class RestAssuredBasics {
 
 
         given(). // request specifications
+
                 header("Accept", "application/vnd.github+json").
-                queryParam("per_page", "2").
+                queryParam("per_page", "10").
+                queryParam("since", "5").
 //            body().
 
         when().   //request type
@@ -64,6 +66,43 @@ public class RestAssuredBasics {
 
 
     }
+
+
+    @Test
+    public void restAssuredCode(){
+
+
+       //Given ->  RequestSpecification
+ RequestSpecification requestSpecification = given().
+
+                header("Accept", "application/vnd.github+json").
+                queryParam("per_page", "10").
+                queryParam("since", "5");
+
+
+ // When -> Response
+        Response response = requestSpecification.when().
+                log().all().
+                get("/users");
+
+// Then -> ValidatableResponse
+        response.then().
+                log().all().
+                statusCode(200);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
 
 
 }

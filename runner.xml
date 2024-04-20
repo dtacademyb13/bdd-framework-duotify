@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="API Tests TDD">
+
+
+    <test name="Rest Assured Automated Tests">
+
+        
+
+       <classes>
+           <class name="utilities.demo.RestAssuredBasics"></class>
+       </classes>
+
+
+    </test>
+
+
+</suite>
