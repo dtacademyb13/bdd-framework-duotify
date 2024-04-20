@@ -309,16 +309,15 @@ public class RestAssuredBasicsDuotify {
 //                statusCode(201).extract().path("user_id"); // you can extract body values with path(jsonPath expression)
                 statusCode(201).extract().jsonPath(); // you can extract body values with jsonPath()
 
-        String userId = jsonPath.getString("user_id");
-        Integer code = jsonPath.getInt("http_code");
+        String userId = jsonPath.getString("user_id"); //user_id value is stored
+//        Integer code = jsonPath.getInt("http_code");
 
-        System.out.println("Returned value: " + userId);
 
         // Verify the user creation through GET endpoint by using the user id returned by POST endpoint
 
         given().
                 header("Accept", "application/json").
-                queryParam("id", userId).
+                queryParam("id", userId). //user ID from the POST request body is passed as a query param of GET request
                 queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
                 when().
                 log().all(). // log the request details
