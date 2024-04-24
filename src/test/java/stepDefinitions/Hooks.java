@@ -13,7 +13,7 @@ import java.time.Duration;
 public class Hooks {
 
 
-    @Before ("not @db_only")
+    @Before ("not @db_only and not @API")
     public void setupScenario(){
         DBUtils.createConnection();
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
@@ -40,7 +40,7 @@ public class Hooks {
 //        Driver.getDriver().manage().deleteAllCookies();
 //    }
 
-    @After ("not @db_only")
+    @After ("not @db_only and not @API")
     public void tearDownScenario(Scenario scenario){
         if(scenario.isFailed()){
             scenario.attach(((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES), "image/png", "failed");

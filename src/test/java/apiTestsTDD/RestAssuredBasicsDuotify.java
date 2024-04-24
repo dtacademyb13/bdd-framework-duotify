@@ -16,9 +16,7 @@ import utilities.ConfigReader;
 import utilities.Driver;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
@@ -560,6 +558,47 @@ public class RestAssuredBasicsDuotify {
 
 
     }
+
+
+
+  @Test
+    public void testGETUSERS(){
+
+
+      JsonPath jsonPath = given().
+              header("Accept", "application/json").
+              queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
+              when().
+              log().all(). // log the request details
+                      get("/users").
+              then().
+              log().all().
+              body("email", not(hasItem(nullValue()))).
+              statusCode(200).extract().jsonPath();
+
+      List<Map<String, Object>> list = jsonPath.getList("$");
+
+      Map<String, Object> json = list.get(new Random().nextInt(list.size()));
+
+      List<String> expected = List.of("id",
+              "username",
+              "firstName",
+              "lastName",
+              "email",
+              "password",
+              "signUpDate",
+              "profilePic");
+
+      org.testng.Assert.assertEquals(new ArrayList<>(json.keySet()), expected);
+
+
+      List<String> emails = jsonPath.getList("email");
+
+      System.out.println(emails);
+
+      Assert.assertTrue(!emails.contains(null));
+
+  }
 
 
 
