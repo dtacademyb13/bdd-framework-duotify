@@ -2,8 +2,10 @@ package stepDefinitions;
 
 import io.cucumber.java.*;
 import io.cucumber.java.en.Then;
+import io.restassured.RestAssured;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import utilities.ConfigReader;
 import utilities.DBUtils;
 import utilities.Driver;
 import utilities.SeleniumUtils;
@@ -13,12 +15,19 @@ import java.time.Duration;
 public class Hooks {
 
 
+
     @Before ("not @db_only and not @API")
     public void setupScenario(){
         DBUtils.createConnection();
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         Driver.getDriver().manage().window().maximize();
     }
+
+    @Before ("@API")
+    public void setupAPI(){
+        RestAssured.baseURI = ConfigReader.getProperty("api.base.uri");
+    }
+
 
 
     @Before ("@db_only")
@@ -44,11 +53,22 @@ public class Hooks {
     public void tearDownScenario(Scenario scenario){
         if(scenario.isFailed()){
             scenario.attach(((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES), "image/png", "failed");
+
         }
 
         Driver.quitDriver();
         DBUtils.close();
     }
+
+    @After ("@API")
+    public void tearDownApi(Scenario scenario){
+        if(scenario.isFailed()){
+           //TODO
+        }
+
+
+    }
+
 
 
 //    @BeforeStep

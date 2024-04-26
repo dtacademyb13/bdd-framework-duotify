@@ -3,6 +3,7 @@ package apiTestsTDD;
 import com.github.javafaker.Faker;
 import io.cucumber.java.sl.In;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;
@@ -14,6 +15,8 @@ import pages.HomePage;
 import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.Endpoint;
+import utilities.Endpoints;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -55,12 +58,18 @@ public class RestAssuredBasicsDuotify {
     @Test
     public void testGET_USERS(){
 
+
         given().
                 header("Accept", "application/json").
+                accept(ContentType.JSON). // alternative to above
+                header("Content-type", "application/json").
+                contentType(ContentType.JSON).
                 queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
+
+
                 when().
                 log().all().
-                get("/users").
+                get(Endpoint.USER.getValue()). //Enum
                 then().
                 log().all().
                 statusCode(200).
@@ -102,7 +111,7 @@ public class RestAssuredBasicsDuotify {
                 queryParam("api_key", "e82042a5f58f449c9d5a9e3cf5a3f43b").
         when().
                 log().all().
-                post("/user").
+                post(Endpoints.USER).
         then().
                 log().all().
                 statusCode(201);

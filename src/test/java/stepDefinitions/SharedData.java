@@ -17,14 +17,11 @@ public class SharedData {
     private String last;
     private String email;
     private String pass;
+    private Object fieldValue;
 
     private RequestSpecification requestSpecification = given(); // initialize an empty requestSpec obj
     private Response response;
 
-
-     static {
-         baseURI = "https://api.github.com";
-     }
 
 
 }
