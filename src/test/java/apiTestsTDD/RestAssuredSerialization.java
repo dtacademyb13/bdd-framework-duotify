@@ -107,13 +107,15 @@ public class RestAssuredSerialization {
     public void serializeAsJavaObjectPOJO(){
 
         User user = new User(
+                "9",
                 "Mr Jekyll",
                 "Jekyll",
                 "Hyde",
                 "hyde@gmail.com",
                 "cddcscdds",
                 "2022-09-27 00:00:00",
-                "assets/images/profile-pics/head_"
+                "assets/images/profile-pics/head_",
+                "2022-09-27 00:00:00"
         );
 
 

@@ -17,13 +17,14 @@ import java.util.Objects;
 @JsonInclude(Include.NON_NULL) // allows null fields to be ignored when object is serialized to json
 public class User {
 
-
+    private String id;
     private String username;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String signUpDate;
+    private String createdAt;
     private String profilePic;
 
 
