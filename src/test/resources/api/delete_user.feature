@@ -1,7 +1,7 @@
 @API
 Feature: Delete /USER endpoint features
 
-  @api_demo
+
   Scenario: Delete an existing user
 
 

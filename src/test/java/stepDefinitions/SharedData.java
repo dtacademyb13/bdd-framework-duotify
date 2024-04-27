@@ -1,11 +1,9 @@
 package stepDefinitions;
 
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import lombok.Data;
 
-import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
 
 @Data
@@ -21,6 +19,9 @@ public class SharedData {
 
     private RequestSpecification requestSpecification = given(); // initialize an empty requestSpec obj
     private Response response;
+
+
+    private String JWToken;
 
 
 
