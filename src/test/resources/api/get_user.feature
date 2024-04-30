@@ -1,7 +1,7 @@
 @API
 Feature: GET /user API endpoint features
 
-
+ @Get_User
   Scenario: Retrieve a single user with valid id
 
     Given the request is authenticated with a valid API key

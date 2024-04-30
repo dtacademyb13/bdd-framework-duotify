@@ -1,14 +1,14 @@
 package stepDefinitions;
 
-import io.cucumber.java.*;
-import io.cucumber.java.en.Then;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.restassured.RestAssured;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import utilities.ConfigReader;
 import utilities.DBUtils;
 import utilities.Driver;
-import utilities.SeleniumUtils;
 
 import java.time.Duration;
 
@@ -60,14 +60,8 @@ public class Hooks {
         DBUtils.close();
     }
 
-    @After ("@API")
-    public void tearDownApi(Scenario scenario){
-        if(scenario.isFailed()){
-           //TODO
-        }
 
 
-    }
 
 
 
