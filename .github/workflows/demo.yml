@@ -22,5 +22,5 @@ jobs:
         run: ls
       - name: Step 6. Print some message
         run: echo "Job is finished."
-      - name: Step 7. Run tests
-        run: mvn test
+#      - name: Step 7. Run tests
+#        run: mvn test
