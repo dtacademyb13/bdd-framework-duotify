@@ -34,7 +34,7 @@ jobs:
           chrome-version: 'stable'
 
       - name: Run Regression Tests
-        run: mvn test -Dbrowser=chrome-headless
+        run: mvn test
 
       - name: Attach Test Results
         if: always()
