@@ -34,7 +34,7 @@ jobs:
           chrome-version: 'stable'
 
       - name: Run Regression Tests
-        run: mvn test
+        run: mvn test -Dcucumber.filter.tags=@regr -Dbrowser=chrome-headless
 
       - name: Attach Test Results
         if: always()
