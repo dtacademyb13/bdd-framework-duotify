@@ -1,0 +1,26 @@
+name: GitHub Actions Demo
+run-name: Testing GitHub Actions
+
+on:
+  push: # The name of the GitHub event that triggers the workflow.
+    branches:
+      - main
+
+jobs:
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1. Print some message
+        run: echo "This job is automatically triggered by a push event."
+      - name: Step 2. Print some message
+        run: echo "Another example of a step"
+      - name: Step 3. Check out repository code
+        uses: actions/checkout@v3
+      - name: Step 4. Print some message
+        run: echo "The repository has been cloned to the runner."
+      - name: Step 5. List files in the repository
+        run: ls
+      - name: Step 6. Print some message
+        run: echo "Job is finished."
+      - name: Step 7. Run tests
+        run: mvn test
