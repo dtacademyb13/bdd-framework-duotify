@@ -36,9 +36,9 @@ jobs:
       - name: Run Regression Tests
         run: mvn test -Dbrowser=chrome-headless
 
-#      - name: Attach Test Results
-#        if: always()
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: Test Result Report File
-#          path: target/cucumber-report/report.html
+      - name: Attach Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test Result Report File
+          path: target/cucumber-report/report.html
