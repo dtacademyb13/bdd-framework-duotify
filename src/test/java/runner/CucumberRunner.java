@@ -6,7 +6,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 @CucumberOptions (
 
-        tags = "@api_demo",
+         tags = "@regr",
         //"@smoke and @flaky" - scenarios tagged with both smoke and flaky
         //"@smoke or @flaky" - scenarios tagged with either smoke or flaky
         //"not @REGRESSION" - scenarios not tagged with regression

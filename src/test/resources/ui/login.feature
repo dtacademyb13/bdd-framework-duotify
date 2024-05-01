@@ -7,7 +7,7 @@ Feature: User login for Music Streaming App
     Given the user is on the login page
 
 
-  @valid @smoke
+  @valid @smoke @regr
   Scenario: Successful login wih a valid username and password
 
     When the user enters valid username and password
@@ -20,7 +20,7 @@ Feature: User login for Music Streaming App
     Then the user should not be directed to the personal dashboard
 
 
-  @unsuccessful
+  @unsuccessful @regr
   Scenario: Unsuccessful login wih no username and password
 
     When the user enters no username and password

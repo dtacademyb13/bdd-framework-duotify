@@ -5,7 +5,7 @@ Feature: User sign up
     Given the user is on the login page
     And The user clicks on the sign up link
 
-
+  @regr
   Scenario: Sign up with valid information
     When The user fills up the fields with valid info
     Then The user should be able to sign up successfully

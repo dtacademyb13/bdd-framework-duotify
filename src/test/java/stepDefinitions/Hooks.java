@@ -18,7 +18,7 @@ public class Hooks {
 
     @Before ("not @db_only and not @API")
     public void setupScenario(){
-        DBUtils.createConnection();
+
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         Driver.getDriver().manage().window().maximize();
     }
@@ -57,7 +57,7 @@ public class Hooks {
         }
 
         Driver.quitDriver();
-        DBUtils.close();
+
     }
 
 

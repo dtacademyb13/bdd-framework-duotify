@@ -98,14 +98,22 @@
         </dependency>
 
 
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.10.1</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.testng</groupId>-->
+<!--            <artifactId>testng</artifactId>-->
+<!--            <version>7.10.1</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
-<!--        serializer library-->
+
+<!--        <dependency>-->
+<!--            <groupId>io.cucumber</groupId>-->
+<!--            <artifactId>cucumber-testng</artifactId>-->
+<!--            <version>7.17.0</version>-->
+<!--        </dependency>-->
+
+
+        <!--        serializer library-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>

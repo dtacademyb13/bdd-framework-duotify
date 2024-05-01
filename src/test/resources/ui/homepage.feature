@@ -8,9 +8,9 @@ Feature: Music Streaming App Homepage
   Background:
     Given the user is on the login page
     And the user enters valid username and password
-    And the user should not be directed to the personal dashboard
+    And the user should be directed to the personal dashboard
 
-  @smoke
+  @smoke @regr
   Scenario: User opens the app and sees the welcome message
 
     Then the user should see the welcome message
@@ -21,11 +21,11 @@ Feature: Music Streaming App Homepage
     Then the user should see the homepage links
 
 
-
+  @regr
   Scenario: Verify homepage default albums
     Then the user should see 9 recommended albums
 
-  @albums
+  @albums @regr
   Scenario: Default albums
 
     Then the following recommended albums should be displayed

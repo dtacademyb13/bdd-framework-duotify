@@ -1,0 +1,44 @@
+name: Regression test Suite
+
+run-name: Running regression tests
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  regression-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Install JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'oracle'
+
+      - name: Setup Maven
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Install Chrome Browser
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 'stable'
+
+      - name: Run Regression Tests
+        run: mvn test -Dbrowser=chrome-headless
+
+#      - name: Attach Test Results
+#        if: always()
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: Test Result Report File
+#          path: target/cucumber-report/report.html
