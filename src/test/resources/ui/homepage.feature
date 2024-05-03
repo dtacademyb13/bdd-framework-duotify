@@ -10,12 +10,12 @@ Feature: Music Streaming App Homepage
     And the user enters valid username and password
     And the user should be directed to the personal dashboard
 
-  @smoke @regr
+  @SMOKE @regr
   Scenario: User opens the app and sees the welcome message
 
     Then the user should see the welcome message
 
-  @smoke @flaky @homepage
+  @SMOKE @flaky @homepage
   Scenario: Verify homepage links
 
     Then the user should see the homepage links

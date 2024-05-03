@@ -9,6 +9,7 @@ Feature: Album features
     And the user should be directed to the personal dashboard
 
  @softAssertions
+   @SMOKE
   Scenario: Verify album details
 
     When the user clicks on the album "Cruel Summer"
@@ -19,6 +20,7 @@ Feature: Album features
 
 
   @albumDetails
+  @SMOKE
   Scenario: Verify album details
     When the user clicks on the album "Escape"
     Then the album should have the following info

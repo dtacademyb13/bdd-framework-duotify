@@ -1,5 +1,4 @@
 name: Regression test Suite
-
 run-name: Running regression tests
 
 on:
