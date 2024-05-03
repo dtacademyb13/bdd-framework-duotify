@@ -42,7 +42,7 @@ jobs:
         run: mvn test -D cucumber.filter.tags=@SMOKE -D browser=chrome-headless
 
       - name: Run Smoke Tests in Edge
-        run: mvn test -D cucumber.filter.tags=@SMOKE -D browser=edge
+        run: mvn test -D cucumber.filter.tags=@SMOKE -D browser=edge-headless
 
       - name: Attach Test Results
         if: always()

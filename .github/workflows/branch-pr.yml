@@ -1,0 +1,41 @@
+name: Branch tests
+run-name: Running branch tests
+
+on:
+ pull_request:  # this job will run anytime any branch creates a pull request against the main branch
+    branches:
+      - main
+jobs:
+  branch-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'oracle'
+
+      - name: Setup Maven
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Setup Chrome Browser
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 'stable'
+
+      - name: Run Branch Tests in headless Chrome
+        run: mvn test -Dcucumber.filter.tags="@smoke" -Dbrowser=chrome-headless
+
+      - name: Generate Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: HTML Report
+          path: target/cucumber-report/report.html
