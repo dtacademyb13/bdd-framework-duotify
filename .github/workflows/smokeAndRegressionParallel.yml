@@ -34,7 +34,7 @@ jobs:
           chrome-version: 'stable'
 
       - name: Run Smoke Tests
-        run: mvn test -Dcucumber.filter.tags=@SMOKE -Dbrowser=chrome-headless
+        run: mvn test -D cucumber.filter.tags=@SMOKE -D browser=chrome-headless
 
 #      - name: Attach Test Results
 #        if: always()
