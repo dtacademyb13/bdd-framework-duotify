@@ -31,7 +31,7 @@ jobs:
           chrome-version: 'stable'
 
       - name: Run Branch Tests in headless Chrome
-        run: mvn test -Dcucumber.filter.tags="@smoke" -Dbrowser=chrome-headless
+        run: mvn test -Dcucumber.filter.tags="@SMOKE" -Dbrowser=chrome-headless
 
       - name: Generate Report
         if: always()
