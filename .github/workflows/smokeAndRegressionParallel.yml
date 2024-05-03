@@ -36,12 +36,12 @@ jobs:
       - name: Run Smoke Tests
         run: mvn test -D cucumber.filter.tags=@SMOKE -D browser=chrome-headless
 
-#      - name: Attach Test Results
-#        if: always()
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: Test Result Report File
-#          path: target/cucumber-report/report.html
+      - name: Attach Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test Result HTML report
+          path: target/cucumber-report/report.html
 
 
   regression-test:
@@ -72,9 +72,9 @@ jobs:
       - name: Run Regression Tests
         run: mvn clean test -Dcucumber.filter.tags=@regr -Dbrowser=chrome-headless
 
-#      - name: Attach Test Results
-#        if: always()
-#        uses: actions/upload-artifact@v3
-#        with:
-#          name: Test Result Report File
-#          path: target/cucumber-report/report.html
+      - name: Attach Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: Test Result HTML Report
+          path: target/cucumber-report/report.html
