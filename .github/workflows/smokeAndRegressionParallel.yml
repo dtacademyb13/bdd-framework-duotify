@@ -38,7 +38,7 @@ jobs:
 
       - name: Attach Test Results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Test Result HTML report
           path: target/cucumber-report/report.html
@@ -74,7 +74,7 @@ jobs:
 
       - name: Attach Test Results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: Test Result HTML Report
+          name: Regression Result HTML Report
           path: target/cucumber-report/report.html
