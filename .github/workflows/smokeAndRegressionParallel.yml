@@ -33,8 +33,16 @@ jobs:
         with:
           chrome-version: 'stable'
 
-      - name: Run Smoke Tests
+      - name: Install Edge Browser
+        uses: browser-actions/setup-edge@v1
+        with:
+          edge-version: 'stable'
+
+      - name: Run Smoke Tests in Chrome
         run: mvn test -D cucumber.filter.tags=@SMOKE -D browser=chrome-headless
+
+      - name: Run Smoke Tests in Edge
+        run: mvn test -D cucumber.filter.tags=@SMOKE -D browser=edge
 
       - name: Attach Test Results
         if: always()
