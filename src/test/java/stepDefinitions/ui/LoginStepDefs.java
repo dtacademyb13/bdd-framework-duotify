@@ -7,15 +7,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.DBUtils;
 import utilities.Driver;
+import utilities.SeleniumUtils;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class LoginStepDefs {
@@ -34,6 +32,8 @@ public class LoginStepDefs {
 
     @Then("the user should be directed to the personal dashboard")
     public void theUserShouldBeDirectedToThePersonalDashboard() {
+
+        SeleniumUtils.waitForUrlContains("http://duotify.us-east-2.elasticbeanstalk.com/browse.php?", 5);
 
         Assert.assertEquals("http://duotify.us-east-2.elasticbeanstalk.com/browse.php?", Driver.getDriver().getCurrentUrl());
 

@@ -25,7 +25,7 @@ public class AlbumStepDefs {
 
         SoftAssertions softAssertions = new SoftAssertions();
 
-        softAssertions.assertThat(actualAlbumName+"ds").isEqualTo(expectedDataAsMap.get("name"));
+        softAssertions.assertThat(actualAlbumName).isEqualTo(expectedDataAsMap.get("name"));
         softAssertions.assertThat(albumDetailsPage.getAuthor().getText().substring(3)).isEqualTo(expectedDataAsMap.get("author"));
         softAssertions.assertThat(albumDetailsPage.getSongCount().getText().split(" ")[0] ).isEqualTo(expectedDataAsMap.get("songCount"));
 
